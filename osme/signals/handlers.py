@@ -2,19 +2,19 @@
 
 from django.core.cache import cache
 from django.db.models.signals import post_delete, post_save
-from django.dispatch import receiver
 from osme.models import Region
 
 
-@receiver(post_save, sender=Region)
-def set_region_cache(sender, **kwargs):
+def update_region_cache(sender, **kwargs):
+    signal = kwargs['signal']
     instance = kwargs['instance']
     key = sender.CACHE_KEY_PATTERN.format(instance.query_string)
-    cache.set(key, instance.content)
+
+    if signal == post_save:
+        cache.set(key, instance.content)
+    elif signal == post_delete:
+        cache.delete(key)
 
 
-@receiver(post_delete, sender=Region)
-def delete_region_cache(sender, **kwargs):
-    instance = kwargs['instance']
-    key = sender.CACHE_KEY_PATTERN.format(instance.query_string)
-    cache.delete(key)
+post_save.connect(update_region_cache, Region)
+post_delete.connect(update_region_cache, Region)
