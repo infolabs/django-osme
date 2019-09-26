@@ -14,8 +14,9 @@ def regions_data_view(request, path):
         return HttpResponseBadRequest()
 
     query_string = request.META['QUERY_STRING']
+    cache_key = Region.CACHE_KEY_PATTERN.format(query_string)
 
-    content = cache.get(Region.CACHE_KEY_PATTERN.format(query_string), None)
+    content = cache.get(cache_key, None)
     if content is not None:
         return HttpResponse(content, content_type='text/plain')
 
@@ -24,6 +25,7 @@ def regions_data_view(request, path):
     except Region.DoesNotExist:
         pass
     else:
+        cache.set(cache_key, region.content)
         return HttpResponse(region.content, content_type='text/plain')
 
     url = '{}{}?{}'.format(REGIONS_DATA_URL, path, query_string)
