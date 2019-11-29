@@ -10,7 +10,7 @@ setup(
         'Django>=1.9.8',
     ],
     package_data={
-        'geoposition': [
+        'osme': [
             'locale/*/LC_MESSAGES/*',
             'static/osme/*',
         ],
