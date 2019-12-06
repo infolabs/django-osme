@@ -30,7 +30,8 @@ def regions_data_view(request, path):
 
     url = '{}{}?{}'.format(REGIONS_DATA_URL, path, query_string)
     try:
-        proxied_response = urllib2.urlopen(url)
+        urllib_request = urllib2.Request(url, headers={'User-Agent': "curl/7.38.0"})
+        proxied_response = urllib2.urlopen(urllib_request)
         content = proxied_response.read()
     except urllib2.HTTPError as e:
         return HttpResponse(e.msg, status=e.code)
