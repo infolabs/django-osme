@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import urllib2
+import requests
 from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseBadRequest
 from osme.models import Region
@@ -29,12 +29,9 @@ def regions_data_view(request, path):
         return HttpResponse(region.content, content_type='text/plain')
 
     url = '{}{}?{}'.format(REGIONS_DATA_URL, path, query_string)
-    try:
-        urllib_request = urllib2.Request(url, headers={'User-Agent': "curl/7.38.0"})
-        proxied_response = urllib2.urlopen(urllib_request)
-        content = proxied_response.read()
-    except urllib2.HTTPError as e:
-        return HttpResponse(e.msg, status=e.code)
+    r = requests.get(url, headers={'User-Agent': "curl/7.38.0"})
+    if r.status_code != requests.codes.ok:
+        return HttpResponse('Server responded with error', status=r.status_code)
     else:
-        Region(query_string=query_string, content=content).save()
-        return HttpResponse(content, status=proxied_response.code, content_type='text/plain')
+        Region(query_string=query_string, content=r.content).save()
+        return HttpResponse(r.content, status=r.status_code, content_type='text/plain')

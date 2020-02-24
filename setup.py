@@ -8,6 +8,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'Django>=1.9.8',
+        'requests>=2.23.0',
     ],
     package_data={
         'osme': [
