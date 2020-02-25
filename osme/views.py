@@ -22,6 +22,10 @@ def regions_data_view(request, path):
 
     try:
         region = Region.objects.get(query_string=query_string)
+    except Region.MultipleObjectsReturned:
+        # delete everything and create a new one from the server
+        regions = Region.objects.filter(query_string=query_string)
+        regions.delete()
     except Region.DoesNotExist:
         pass
     else:
