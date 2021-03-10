@@ -646,7 +646,6 @@
                     };
                 }
                 var addr = HOST + region + "/full";
-                console.log('=========', addr);
                 if (!cache[addr] || options.nocache) {
                     var _this = this;
                     this.loadData(addr, function (data) {
