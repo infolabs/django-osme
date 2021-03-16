@@ -28,7 +28,8 @@ def regions_data_view(request, osm_id):
         except Region.DoesNotExist:
             pass
         else:
-            content = json.loads(region.content)
+            content = region.content
+            cache.set(cache_key, region.content)
 
         if region is None:
             url = '{}{}/{}'.format(REGIONS_DATA_URL, osm_id, "full")
@@ -39,5 +40,5 @@ def regions_data_view(request, osm_id):
                 content = json.dumps(osm2geojson.xml2geojson(r.content, filter_used_refs=False, log_level='INFO'))
                 region = Region(osm_id=osm_id, content=content)
                 region.save()
-
+                cache.set(cache_key, region.content)
     return HttpResponse(content, content_type='application/json')
