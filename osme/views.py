@@ -14,7 +14,11 @@ def regions_data_view(request, path):
 
     content = cache.get(cache_key, None)
     if content is not None:
-        return HttpResponse(content, content_type='text/plain')
+        if 'features' in content:
+            content_features = content['features']
+        else:
+            content_features = content
+        return HttpResponse(content_features, content_type='text/plain')
 
     try:
         region = Region.objects.get(query_string=path)
@@ -36,4 +40,5 @@ def regions_data_view(request, path):
         import osm2geojson
         geojson = osm2geojson.xml2geojson(r.content, filter_used_refs=False, log_level='INFO')
         Region(query_string=path, content=geojson).save()
-        return HttpResponse(r.content, status=r.status_code, content_type='text/plain')
+        _region = Region.objects.get(query_string=path)
+        return HttpResponse(_region.content, status=r.status_code, content_type='text/plain')
