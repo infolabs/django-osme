@@ -5,5 +5,5 @@ from osme.views import regions_data_view
 
 
 urlpatterns = [
-    url(r'^api/0.6/relation/(?P<path>\d+)/full$', regions_data_view, name='regions_data'),
+    url(r'^api/0.6/relation/(?P<osm_id>\d+)/full$', regions_data_view, name='regions_data'),
 ]

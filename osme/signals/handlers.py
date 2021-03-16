@@ -8,7 +8,7 @@ from osme.models import Region
 def update_region_cache(sender, **kwargs):
     signal = kwargs['signal']
     instance = kwargs['instance']
-    key = sender.CACHE_KEY_PATTERN.format(instance.query_string)
+    key = sender.CACHE_KEY_PATTERN.format(instance.osm_id)
 
     if signal == post_save:
         cache.set(key, instance.content)

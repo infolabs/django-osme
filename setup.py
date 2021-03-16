@@ -9,6 +9,7 @@ setup(
     install_requires=[
         'Django>=1.9.8',
         'requests>=2.23.0',
+        'jsonfield>=2.1.1',
     ],
     package_data={
         'osme': [

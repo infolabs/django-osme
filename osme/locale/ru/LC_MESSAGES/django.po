@@ -7,8 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-08 10:20+0000\n"
-"PO-Revision-Date: 2020-05-08 13:23+0300\n"
+"POT-Creation-Date: 2021-03-16 12:56+0000\n"
+"PO-Revision-Date: 2021-03-16 15:57+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,26 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.3\n"
 
 #: apps.py:9
 msgid "OSME"
 msgstr "Управление OSME"
 
-#: models.py:10
-msgid "Query string"
-msgstr "Строка запроса"
+#: models.py:12
+msgid "Osm id"
+msgstr "ID"
 
-#: models.py:11
+#: models.py:13
 msgid "Content"
 msgstr "Контент"
 
-#: models.py:17
+#: models.py:19
 msgid "Region"
 msgstr "Регион"
 
-#: models.py:18
+#: models.py:20
 msgid "Regions"
 msgstr "Регионы"
+
+#~ msgid "Query string"
+#~ msgstr "Строка запроса"
