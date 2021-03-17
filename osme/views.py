@@ -38,13 +38,15 @@ def regions_data_view(request, osm_id):
                 return HttpResponse('Server responded with error', status=r.status_code)
             else:
                 _content = osm2geojson.xml2geojson(r.content, filter_used_refs=False, log_level='INFO')
-
-                content = []
+                content = {
+                    "type": _content['type'],
+                    "features": []
+                }
                 for el in _content['features']:
                     if 'geometry' in el:
                         try:
                             if el['geometry']['type'] == 'Polygon' or el['geometry']['type'] == 'MultiPolygon':
-                                content.append(el)
+                                content['features'].append(el)
                         except KeyError:
                             pass
                 content = json.dumps(content)
