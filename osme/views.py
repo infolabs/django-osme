@@ -45,6 +45,7 @@ def regions_data_view(request, osm_id):
                 for el in _content['features']:
                     if 'geometry' in el:
                         try:
+                            el['geometry']['coordinates'] = el['geometry']['coordinates'][0]
                             if el['geometry']['type'] == 'Polygon' or el['geometry']['type'] == 'MultiPolygon':
                                 content['features'].append(el)
                         except KeyError:
