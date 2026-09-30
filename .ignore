@@ -1,0 +1,6 @@
+!graft/
+graft/.cache/
+graft/.graph/
+# Собранный JS-справочник регионов и его минифицированная копия
+osme/static/
+osme/migrations/
