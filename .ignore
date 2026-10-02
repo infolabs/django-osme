@@ -4,3 +4,6 @@ graft/.graph/
 # Собранный JS-справочник регионов и его минифицированная копия
 osme/static/
 osme/migrations/
+
+# Черновики docs/other не ищем. Канонические документы в docs/ — ищем.
+docs/other/
